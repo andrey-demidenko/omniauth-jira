@@ -66,7 +66,7 @@ module OmniAuth
       end
 
       def user_info
-        @user_info ||= MultiJson.decode(access_token.get(session_info['self']).body)
+        @user_info ||= MultiJson.decode(access_token.get("/rest/api/latest/user?username=#{session_info['name']}").body)
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
       end
